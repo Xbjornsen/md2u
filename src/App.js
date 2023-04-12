@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Common/Navbar';
+import Footer from './components/Common/Footer';
+import Home from './components/Pages/Home';
+import Chappie from './components/Pages/Chappie';
+// import About from './components/Pages/About';
+// import Contact from './components/Pages/Contact';
 
-function App() {
+
+export const App = () => {
   return (
-    <div className="text-center">
-      <header className="bg-gray-800 text-white flex flex-col items-center justify-center min-h-screen text-3xl">
-        <img src={logo} className="pointer-events-none h-40 animate-spin" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="text-blue-400"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/chappie" element={<Chappie />} />
+          {/* <Route path="/contact" component={Contact} /> */}
+        {/* Add more routes as needed */}
+      </Routes>
+      <Footer />
+      </div>
+
+    </Router>
   );
 }
 
