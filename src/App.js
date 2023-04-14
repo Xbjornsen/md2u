@@ -4,9 +4,8 @@ import Navbar from './components/Common/Navbar';
 import Footer from './components/Common/Footer';
 import Home from './components/Pages/Home';
 import Chappie from './components/Pages/Chappie';
-// import About from './components/Pages/About';
-// import Contact from './components/Pages/Contact';
-
+// app.js
+console.log('apikey:', process.env.REACT_APP_API_KEY); // Access environment variable using `process.env`
 
 export const App = () => {
   return (
@@ -16,8 +15,6 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/chappie" element={<Chappie />} />
-          {/* <Route path="/contact" component={Contact} /> */}
-        {/* Add more routes as needed */}
       </Routes>
       <Footer />
       </div>
