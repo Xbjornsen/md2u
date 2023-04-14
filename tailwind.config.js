@@ -1,4 +1,5 @@
 module.exports = {
+  purge: ['./src/**/*.jsx'], // Specify your template paths here
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
@@ -15,7 +16,9 @@ module.exports = {
     graydark: '#273444',
     gray: '#8492a6',
     graylight: '#d3dce6',
+    lime: `#00ff00`,
   },
+  
   fontFamily: {
     sans: ['Roboto', 'sans-serif'], // Change default font to Roboto
     serif: ['Merriweather', 'serif'],
