@@ -1,4 +1,5 @@
 module.exports = {
+  purge: ['./src/**/*.jsx'], // Specify your template paths here
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
