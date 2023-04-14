@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RiMenuLine } from 'react-icons/ri'; // Import the menu icon from react-icons library
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track if the dropdown navbar is open or closed
@@ -30,34 +31,38 @@ const Navbar = () => {
       <div className="flex justify-between mx-auto max-w-5xl p-4">
         <div className="flex justify-start ">
           <button
-           ref={menuRef} // Assign the ref to the ul element
+            ref={menuRef} // Assign the ref to the ul element
             className="bg-blue-400 text-white px-4 py-0 rounded-lg hover:shadow-md"
             onClick={toggleNavbar}
           >
             <RiMenuLine size={24} />
           </button>
-        <div className='pl-8 pt-2'>
-        <a href="/" className="flex text-grey font-bold text-xl">
-            Medical Assistant 
-          </a>
-        </div>
+          <div className='pl-8 pt-2'>
+            <a href="/" className="flex text-grey font-bold text-xl">
+              Medical Assistant
+            </a>
+          </div>
         </div>
         <ul className="hidden lg:flex items-center space-x-4">
           <li>
-            <a
-              href="#contact"
-              className="text-grey hover:text-grey-200 hover:shadow-md transition duration-300"
-            >
-              Contact
-            </a>
+            <Link
+              to="/contact">
+              <a
+                href="#contact"
+                className="text-grey hover:text-grey-200 hover:shadow-md transition duration-300"
+              >
+                Contact
+              </a></Link>
+
           </li>
           <li>
-            <a
+            <Link to="/about">            <a
               href="#about"
               className="text-grey hover:text-grey-200 hover:shadow-md transition duration-300"
             >
               About Us
             </a>
+            </Link>
           </li>
           <li>
             <a
@@ -81,7 +86,7 @@ const Navbar = () => {
               className={`block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:shadow-md duration-400 ${isMenuOpen ? 'w-44' : ' hidden'}`}
               onClick={closeMenu} // Close the menu when an item is clicked
             >
-             Medical Certificates
+              Medical Certificates
             </a>
           </li>
           <li>
@@ -90,7 +95,7 @@ const Navbar = () => {
               className={`block px-4 py-2 text-gray-800 hover:bg-blue-100 hover:shadow-md duration-400 ${isMenuOpen ? 'w-44' : ' hidden'}`}
               onClick={closeMenu} // Close the menu when an item is clicked
             >
-             Medical Consulation
+              Medical Consulation
             </a>
           </li>
           <li>
@@ -99,7 +104,7 @@ const Navbar = () => {
               className={`block px-4 pt-2 pb-2 text-gray-800 hover:bg-blue-100 hover:shadow-md duration-400 ${isMenuOpen ? 'w-44' : ' hidden'}`}
               onClick={closeMenu} // Close the menu when an item is clicked
             >
-             Resources
+              Resources
             </a>
           </li>
         </ul>
