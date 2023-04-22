@@ -1,4 +1,17 @@
+
 import { Configuration, OpenAIApi } from "openai";
+import prompts from "../prompts/gptPrompts.json"; // Import the JSON file
+// Get the current date
+const currentDate = new Date();
+
+// Extract the year, month, and day from the date object
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1; // Months are zero-indexed, so add 1 to get the correct month
+const day = currentDate.getDate();
+
+// Create a formatted string for the date
+const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
 
 const configuration = new Configuration({
   organization: process.env.REACT_APP_ORG_KEY,
@@ -9,12 +22,20 @@ const openai = new OpenAIApi(configuration);
 // Define an array to store conversation history
 let conversation = [];
 
-export const sendQuestionToGpt = async (question) => {
+export const sendQuestionToGpt = async (question, promptId) => {
   try {
     if (conversation.length === 0) {
-      // Append system message with name to conversation
-      conversation.push({"role": "system", "content": "Reply to the following questions like you are a doctor, choose a name and a title, your default name for now is Jerome"});
+      const prompt = prompts.prompts.find(p => p.id === promptId);
+      if (prompt) {
+        console.log(prompt)
+        // Append system message to conversation from the prompt object, including current date and time
+        conversation.push({
+          "role": prompt.role,
+          "content": `Current Date and time${formattedDate}, ${prompt.content} `
+        });
+      }
     }
+
 
     // Append user message to conversation with role "user"
     conversation.push({"role": "user", "content": question});

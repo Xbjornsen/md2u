@@ -3,10 +3,10 @@ import "tailwindcss/dist/tailwind.min.css"; // Import the Tailwind CSS file
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 py-4 ">
-      <div className="container mx-auto px-4 flex justify-between">
+    <footer className="bg-gray-200 text-sm ">
+      <div className="container mx-auto px-4 lg:py-4 sm:py-2 flex justify-between">
         <div>
-          <p className="text-gray-600">&copy; {new Date().getFullYear()} Your Medical Centre. All rights reserved.</p>
+          <p className="text-gray-600 ">&copy; {new Date().getFullYear()} Your Medical Centre. All rights reserved.</p>
         </div>
         <div>
           <ul className="flex flex-wrap">
