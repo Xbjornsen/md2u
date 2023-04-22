@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPaperPlane, FaTrash } from "react-icons/fa";
 import { sendQuestionToGpt } from "../../services/api"; // Import the API function
 
-const Chappie = () => {
-    const [messages, setMessages] = useState([]);
+const Certificate = () => {
+    const [messages, setMessages] = useState([
+        {
+            question: "Hi I would like to fill out a medical certificate form",
+            response: "" // Empty response for the first message
+        }
+    ]);
     const [inputText, setInputText] = useState("");
+    // Fetch gptResponse from API on component mount
+    useEffect(() => {
+        const fetchGptResponse = async () => {
+            try {
+                // Fetch gptResponse from API
+                const gptResponse = await sendQuestionToGpt(messages[0].question, "MedicalCertificateForm");
 
+                // Update the response for the initial message in messages state
+                setMessages((prevMessages) => {
+                    const updatedMessages = [...prevMessages];
+                    updatedMessages[0].response = gptResponse;
+                    return updatedMessages;
+                });
+            } catch (error) {
+                console.error("Failed to fetch gptResponse", error);
+            }
+        };
+
+        fetchGptResponse();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     // Function to handle sending a question
     const handleSendQuestion = async () => {
         if (inputText.trim() !== "") {
@@ -15,36 +40,42 @@ const Chappie = () => {
             // Add the new message to the messages state
             setMessages((prevMessages) => [...prevMessages, newMessage]); // Use functional update with setMessages
 
-            // Send the question and previous questions to GPT API and update the response in the newMessage object
-            const gptResponse = await sendQuestionToGpt(inputText);
-            if (gptResponse) {
-                newMessage.response = gptResponse;
-                setMessages((prevMessages) =>
-                    prevMessages.map((message) =>
-                        message.question === newMessage.question ? newMessage : message
-                    )
-                ); // Update the messages state with the updated response
+            try {
+                // Send the question and previous questions to GPT API and update the response in the newMessage object
+                const gptResponse = await sendQuestionToGpt(inputText);
+                if (gptResponse) {
+                    newMessage.response = gptResponse;
+                    setMessages((prevMessages) =>
+                        prevMessages.map((message) =>
+                            message.question === newMessage.question ? newMessage : message
+                        )
+                    ); // Update the messages state with the updated response
+                }
+            } catch (error) {
+                console.error("Failed to send question to GPT API:", error);
             }
 
             // Clear the input text
             setInputText("");
         }
     };
+
+
     // Function to handle refreshing the chat
     const handleRefreshChat = () => {
         // Clear the messages state
         setMessages([]);
     };
     const handleKeyPress = (event) => {
-        if (event.key === "Enter") {
-            // Check if Enter key is pressed
+        if (event.key === "Enter" && !event.shiftKey) {
+            // Check if Enter key is pressed without Shift key
             handleSendQuestion();
         }
     };
 
     return (
-        <div className="flex-1 container mx-auto px-4 py-8">
-            <div className="flex flex-col">
+        <div className="flex-1 flex-col container mx-auto max-w-5xl p-2 ">
+            <div className="flex-row inset-x-0 bottom-0 p-2 ">
                 <div className="flex-1 overflow-y-auto">
                     <ul className="space-y-2">
                         {messages.map((message, index) => (
@@ -115,4 +146,4 @@ const Chappie = () => {
     );
 };
 
-export default Chappie;
+export default Certificate;
