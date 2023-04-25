@@ -3,7 +3,7 @@ import "tailwindcss/dist/tailwind.min.css"; // Import the Tailwind CSS file
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 text-sm ">
+    <footer className="bg-blue-100 rounded-lg">
       <div className="container mx-auto px-4 lg:py-4 sm:py-2 flex justify-between">
         <div>
           <p className="text-gray-600 ">&copy; {new Date().getFullYear()} Your Medical Centre. All rights reserved.</p>
