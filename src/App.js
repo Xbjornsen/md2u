@@ -8,6 +8,7 @@ import Contact from './components/Pages/Contact';
 import About from './components/Pages/About';
 import SignIn from './components/Pages/SignIn';
 import Certificate from './components/Pages/Certificate';
+import CertificateForm from './components/Pages/CertificateForm';
 import Prescription from './components/Pages/Prescription';
 // app.js
 
@@ -23,6 +24,7 @@ export const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/certificate" element={<Certificate />} />
+        <Route path="/certificateForm" element={<CertificateForm />} />
         <Route path="/prescription" element={<Prescription />} />
       </Routes>
       <Footer />

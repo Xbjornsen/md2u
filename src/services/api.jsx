@@ -27,11 +27,10 @@ export const sendQuestionToGpt = async (question, promptId) => {
     if (conversation.length === 0) {
       const prompt = prompts.prompts.find(p => p.id === promptId);
       if (prompt) {
-        console.log(prompt)
         // Append system message to conversation from the prompt object, including current date and time
         conversation.push({
           "role": prompt.role,
-          "content": `Current Date and time${formattedDate}, ${prompt.content} `
+          "content": `Current Date and time for reference${formattedDate}, ${prompt.content} `
         });
       }
     }
